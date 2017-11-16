@@ -24,18 +24,23 @@ fetch(endpoint)
 
 function findMatches(wordToMatch, cities){
   return cities.filter(place => {
+
+
     const regex = new RegExp(wordToMatch, 'gi')
     return place.city.match(regex) || place.state.match(regex)
   })
 }
 
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 function displayMatches() {
-  const matchArr = findMatches(this.value, cities)
-  const html = matchArr.map(place => {
+  const matchArray = findMatches(this.value, cities)
+  const html = matchArray.map(place => {
     const regex = new RegExp(this.value, 'gi')
     const cityName = place.city.replace(regex, `<span class="h1">${this.value}</span>`)
     const stateName = place.state.replace(regex, `<span class="h1">${this.value}</span>`)
-
     return `
       <li>
         <span class="name">${cityName}, ${stateName}</span>
@@ -52,9 +57,6 @@ const suggestions = document.querySelector('.suggestions')
 searchInput.addEventListener('change', displayMatches)
 searchInput.addEventListener('keyup', displayMatches)
 
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
 
 </script>
   </body>
