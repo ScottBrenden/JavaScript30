@@ -7,6 +7,15 @@
 </head>
 <body>
 <script>
+const pressed = []
+const theCode = 'gohawks'
+
+window.addEventListener('keyup', (e) => {
+  console.log(pressed)
+  pressed.push(e.key)
+  pressed.splice(-theCode.length - 1, pressed.length - theCode.length)
+  if(pressed.join('') == theCode) console.log('GO HAWKS!');
+})
 </script>
 </body>
 </html>
